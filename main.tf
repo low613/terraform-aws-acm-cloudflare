@@ -1,5 +1,5 @@
 data "cloudflare_zone" "zone" {
-  name = var.domain_name
+  name = var.zone_name
 }
 
 resource "aws_acm_certificate" "certificate" {
@@ -16,9 +16,16 @@ resource "aws_acm_certificate" "certificate" {
 
 resource "cloudflare_record" "validation" {
   zone_id = data.cloudflare_zone.zone.zone_id
-  name = aws_acm_certificate.certificate.domain_validation_options[0].resource_record_name
-  type = aws_acm_certificate.certificate.domain_validation_options[0].resource_record_type
-  value = aws_acm_certificate.certificate.domain_validation_options[0].resource_record_value
+  for_each = {
+    for dvo in aws_acm_certificate.certificate.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      value = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+  name = each.value.name
+  type = each.value.type
+  value = each.value.value
 }
 
 resource "aws_acm_certificate_validation" "certificate" {

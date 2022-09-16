@@ -3,3 +3,7 @@ variable "domain_name" {
   description = "The primary domain name"
 }
 
+variable "zone_name" {
+  type = string
+  description = "The zone name"
+}
