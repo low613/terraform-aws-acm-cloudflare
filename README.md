@@ -24,8 +24,8 @@ The following resources are used by this module:
 
 - [aws_acm_certificate.certificate](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) (resource)
 - [aws_acm_certificate_validation.certificate](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation) (resource)
-- [cloudflare_record.validation](https://registry.terraform.io/providers/hashicorp/cloudflare/3.23.0/docs/resources/record) (resource)
-- [cloudflare_zone.zone](https://registry.terraform.io/providers/hashicorp/cloudflare/3.23.0/docs/data-sources/zone) (data source)
+- [cloudflare_record.validation](https://registry.terraform.io/providers/cloudflare/cloudflare/3.23.0/docs/resources/record) (resource)
+- [cloudflare_zone.zone](https://registry.terraform.io/providers/cloudflare/cloudflare/3.23.0/docs/data-sources/zone) (data source)
 
 ## Required Inputs
 
@@ -34,6 +34,12 @@ The following input variables are required:
 ### <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name)
 
 Description: The primary domain name
+
+Type: `string`
+
+### <a name="input_zone_name"></a> [zone\_name](#input\_zone\_name)
+
+Description: The zone name
 
 Type: `string`
 
