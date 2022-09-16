@@ -30,5 +30,5 @@ resource "cloudflare_record" "validation" {
 
 resource "aws_acm_certificate_validation" "certificate" {
   certificate_arn = aws_acm_certificate.certificate.arn
-  validation_record_fqdns = [var.domain_name]
+  validation_record_fqdns = [for record in cloudflare_record.validation: record.hostname]
 }
